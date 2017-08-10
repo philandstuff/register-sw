@@ -15,10 +15,10 @@ var getJSON = function(url) {
   });
 };
 
-var buttonHandler = function() {
+var buttonHandler = function(event) {
+  event.preventDefault();
   var cc = document.getElementById('cc').value;
   getJSON('https://country.register.gov.uk/record/' + cc + '.json').then(function(data) {
-    console.log(data);
     var item = data[cc].item[0];
     document.getElementById('code').innerHTML = cc;
     document.getElementById('shortname').innerHTML = item.name;
@@ -26,7 +26,6 @@ var buttonHandler = function() {
   }, function(status) {
     console.log('Something went wrong.' + status);
   });
-  return false;
 }
 
 if ('serviceWorker' in navigator) {
